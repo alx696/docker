@@ -95,8 +95,8 @@ http
 # 运行示例
 ```
 $ docker run -d --restart=always \
-  -p 9092:9092 \
-  -e IP=172.17.0.1 -e PORT=9092 \
-  --name "kafka" xm69/kafka:2.2.0
+  -p 443:443 \
+  -v ${PWD}/html:/web \
+  --name "kafka" xm69/nginx:alpine-1.15
 ```
 
