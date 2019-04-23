@@ -1,5 +1,5 @@
 #父镜像
-FROM xm69/openjdk:alpine-13.0
+FROM xm69/openjdk:alpine-13
 
 #版本定义
 ENV VERSION_KAFKA 2.2.0
