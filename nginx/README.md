@@ -95,8 +95,8 @@ http
 # 运行示例
 ```
 $ docker run -d --restart=always \
-  -p 443:443 \
+  -p 80:80 -p 443:443 \
   -v ${PWD}/html:/web \
-  --name "kafka" xm69/nginx:alpine-1.15
+  --name "nginx" xm69/nginx:alpine-1.15
 ```
 
