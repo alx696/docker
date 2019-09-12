@@ -1,4 +1,4 @@
-# 配置文件
+# 所用配置文件
 `/etc/nginx/nginx.conf`
 
 ```
@@ -85,10 +85,10 @@ http
 }
 ```
 
-# WEB
+# web目录路径
 `/web`
 
-# TLS
+# 证书路径
 * `/tls/server.cer` 证书
 * `/tls/server.key` 私钥
 
@@ -97,6 +97,11 @@ http
 $ docker run -d --restart=always \
   -p 80:80 -p 443:443 \
   -v ${PWD}/html:/web \
-  --name "nginx" xm69/nginx:alpine-1.15
+  --name "nginx" xm69/nginx:alpine-1.17
 ```
 
+# 构建
+```
+$ docker build -t xm69/nginx:1.17 .
+```
+> 注意: 以子模块形式引用了**headers-more-nginx-module**, 构建前记得执行 `git submodule update --init --recursive` 拉取.

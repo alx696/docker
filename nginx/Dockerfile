@@ -38,9 +38,13 @@ RUN echo "http://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories \
 		gd-dev \
 		geoip-dev \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
+  && curl -fSL https://github.com/openresty/headers-more-nginx-module/archive/v0.33.tar.gz -o headers.tar.gz \
   && tar zxf nginx.tar.gz \
-  && rm nginx.tar.gz \
+  && tar zxf headers.tar.gz \
+  && rm nginx.tar.gz headers.tar.gz \
   && mv nginx-${NGINX_VERSION} nginx \
+  && mv headers-more-nginx-module-0.33 headers-more-nginx-module \
+  && mv headers-more-nginx-module /resource/ \
   && cd nginx \
   && sh configure --prefix=/etc/nginx \
       --sbin-path=/usr/sbin/nginx \
