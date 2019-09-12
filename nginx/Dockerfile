@@ -77,7 +77,7 @@ RUN echo "http://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories \
   # 删除资源目录
   && rm -rf /resource
 
-EXPOSE 80, 443
+EXPOSE 80 443
 
 STOPSIGNAL SIGTERM
 
