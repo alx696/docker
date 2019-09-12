@@ -96,8 +96,8 @@ http
 ```
 $ docker run -d --restart=always \
   -p 80:80 -p 443:443 \
-  -v ${PWD}/html:/web \
-  --name "nginx" xm69/nginx:alpine-1.17
+  -v ${PWD}/web:/web \
+  --name "nginx" xm69/nginx:1.17
 ```
 
 # 构建
