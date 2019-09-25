@@ -52,6 +52,7 @@ RUN echo "http://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories \
 		  --conf-path=/etc/nginx/nginx.conf \
       --with-http_ssl_module \
       --with-http_v2_module \
+      --with-http_gzip_static_module \
       --add-module=/resource/headers-more-nginx-module \
   && make -j$(getconf _NPROCESSORS_ONLN) \
   && make install \
@@ -73,6 +74,7 @@ RUN echo "http://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories \
   # 复制资源
   && mv /resource/tls/ /tls/ \
   && mv /resource/nginx.conf /etc/nginx/nginx.conf \
+  && mv /resource/mime.types /etc/nginx/mime.types \
   # 创建服务目录
   && mkdir -p /logs /web \
   # forward request and error logs to docker log collector
