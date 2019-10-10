@@ -1,9 +1,12 @@
 #父镜像
 FROM redis:5-alpine
 
+#环境变量
+ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/latest-stable
+
 #执行
-RUN echo "http://mirrors.aliyun.com/alpine/latest-stable/main/" > /etc/apk/repositories \
-  && echo "http://mirrors.aliyun.com/alpine/latest-stable/community/" >> /etc/apk/repositories \
+RUN echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \
+  && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \
   && apk update \
   \
   #设置时区
