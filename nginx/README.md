@@ -13,10 +13,10 @@
 $ docker run -d --restart=always \
   -p 80:80 -p 443:443 \
   -v ${PWD}/web:/web \
-  --name "nginx" xm69/nginx:1.20
+  --name "nginx" xm69/nginx:1.17
 ```
 
 # 构建
 ```
-$ docker build -t xm69/nginx:1.20 .
+$ docker build -t xm69/nginx:1.17 .
 ```
