@@ -7,14 +7,15 @@
 FROM alpine:3.9
 
 #nginx版本
-ENV NGINX_VERSION 1.17.2
+ENV NGINX_VERSION 1.20.0
+ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/latest-stable
 
 #复制资源
 COPY ["resource/", "/resource/"]
 
 #执行
-RUN echo "http://mirrors.aliyun.com/alpine/v3.9/main/" > /etc/apk/repositories \
-  && echo "http://mirrors.aliyun.com/alpine/v3.9/community/" >> /etc/apk/repositories \
+RUN echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \
+  && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \
   && apk update \
   \
   #设置时区
