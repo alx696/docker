@@ -2,13 +2,14 @@ FROM postgres:11-alpine
 
 MAINTAINER Régis Belson <me@regisbelson.fr>
 
-ENV POSTGIS_VERSION 2.5.2
+ENV POSTGIS_VERSION 2.5.3
+ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/edge
 
 RUN set -ex \
     \
-    && echo "http://mirrors.aliyun.com/alpine/edge/main/" > /etc/apk/repositories \
-    && echo "http://mirrors.aliyun.com/alpine/edge/community/" >> /etc/apk/repositories \
-    && echo "http://mirrors.aliyun.com/alpine/edge/testing/" >> /etc/apk/repositories \
+    && echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \
+    && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \
+    && echo "$ALPINE_MIRROR/testing/" >> /etc/apk/repositories \
     && apk update \
     \
     && apk add --no-cache --virtual .fetch-deps \
