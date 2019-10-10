@@ -1,19 +1,29 @@
-Kafka工作时必须有确定的ip和端口，故运行容器时必须通过环境变量进行设置：
+# 环境变量
 
 * `IP` 设置ip
-* `PORT` 设置端口
+*  `PORT` 设置端口
 
-例如:
+> Kafka工作时必须有确定的ip和端口，故运行容器时必须通过环境变量进行设置.
+
+# 运行示例
+
 ```
 $ docker run -d --restart=always \
   -p 9092:9092 \
   -e IP=172.17.0.1 -e PORT=9092 \
-  --name "kafka" xm69/kafka:2.2
+  --name "kafka" xm69/kafka:2.3
 ```
 
-# 镜像制作步骤
+# 构建
 
-注意:
+```
+$ docker build -t xm69/kafka:2.3 .
+```
+
+# 镜像制作要点
+
+> Dockfile已经自动下载kafka和zookeeper软件包, 无需人工下载和配置.
+
 1. 下载kafka和zookeeper并解压到resource/中,解压后文件夹应去除版本号；
 
 2. 修改app/kafka/config/server.properties中对应项修改为下面这样:
