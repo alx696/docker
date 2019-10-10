@@ -7,7 +7,7 @@
 FROM alpine:3.9
 
 #nginx版本
-ENV NGINX_VERSION 1.20.0
+ENV NGINX_VERSION 1.17.4
 ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/latest-stable
 
 #复制资源
