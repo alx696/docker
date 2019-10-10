@@ -1,7 +1,7 @@
 FROM openjdk:13-alpine
 
 ENV LANG C.UTF-8
-ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/latest-stable/
+ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/latest-stable
 
 RUN echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \
   && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \
