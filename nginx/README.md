@@ -19,10 +19,22 @@
 * 密钥 `/tls/server.key`
 
 # 运行示例
+
 ```
 $ docker run -d --restart=always \
   -p 80:80 -p 443:443 \
   -v ${PWD}/web:/web \
+  --name "nginx" xm69/nginx:1.17
+```
+
+## 指定证书
+
+```
+docker run -d --restart=always \
+  -p 80:80 -p 443:443 \
+  -v ${PWD}/web:/web \
+  -v /etc/letsencrypt/live/app.lilu.red/fullchain.pem:/tls/server.cer \
+  -v /etc/letsencrypt/live/app.lilu.red/privkey.pem:/tls/server.key \
   --name "nginx" xm69/nginx:1.17
 ```
 
