@@ -1,7 +1,5 @@
 FROM postgres:11-alpine
 
-MAINTAINER Régis Belson <me@regisbelson.fr>
-
 ENV POSTGIS_VERSION 2.5.3
 ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/edge
 
@@ -17,7 +15,7 @@ RUN set -ex \
         openssl \
         tar \
     \
-    && wget -O postgis.tar.gz "https://github.com/postgis/postgis/archive/$POSTGIS_VERSION.tar.gz" \
+    && wget -O postgis.tar.gz "https://download.osgeo.org/postgis/source/postgis-$POSTGIS_VERSION.tar.gz" \
     && mkdir -p /usr/src/postgis \
     && tar \
         --extract \
