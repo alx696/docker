@@ -6,11 +6,11 @@
 
 ```
 $ docker run -d -p 6379:6379 \
-  --restart=always --name redis xm69/redis:alpine-5
+  --restart=always --name redis xm69/redis:5
 ```
 
 # 构建
 
 ```
-$ docker build -t xm69/redis:alpine-5 .
+$ docker build -t xm69/redis:5 .
 ```
