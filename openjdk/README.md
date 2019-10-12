@@ -8,5 +8,5 @@
 # 构建
 
 ```
-$ docker build -t xm69/openjdk:alpine-13 .
+$ docker build -t xm69/openjdk:13 .
 ```
