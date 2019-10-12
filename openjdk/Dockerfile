@@ -1,24 +1,32 @@
-FROM openjdk:13-alpine
+FROM openjdk:13-slim
 
-ENV LANG C.UTF-8
-ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/latest-stable
+ENV LANG="C.UTF-8" \
+ DEBIAN_FRONTEND="noninteractive"
 
-RUN echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \
-  && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \
-  && apk update \
-  \
-  #设置时区
-  && apk add --no-cache tzdata \
-  && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-  && echo "Asia/Shanghai" > /etc/timezone \
-  && apk del tzdata \
-  \
-  #中文字体
-  && apk add --no-cache fontconfig xfontsel curl \
-  && curl -O https://np.lilu.red:81/file/font/NotoSansCJKsc-Regular.otf \
-  && mkdir -p /usr/share/fonts \
-  && mv NotoSansCJKsc-Regular.otf /usr/share/fonts/ \
-  && fc-cache -f -v \
-  && fc-list :lang=zh \
-  \
-  && java -version
+RUN \
+  set -eux && \
+  sed -i s/deb.debian.org/mirrors.aliyun.com/g /etc/apt/sources.list && \
+  sed -i s/security.debian.org/mirrors.aliyun.com/g /etc/apt/sources.list && \
+  apt-get update && \
+  apt-get install -y apt-utils && \
+  apt-get install -y apt-transport-https && \
+  apt-get upgrade -y && \
+  apt-get install -y wget nano && \
+  # 时区设为上海
+  apt-get install -y tzdata && \
+  #注意:必须删除/etc/localtime,否则该/etc/timezone方式对时区的修改不会生效!
+  rm /etc/localtime && \
+  echo "Asia/Shanghai" > /etc/timezone && \
+  dpkg-reconfigure -f noninteractive tzdata && \
+  # 中文字体Noto Sans CJK SC Regular
+  apt-get install -y fontconfig xfonts-utils && \
+  mkdir -p /usr/share/fonts/ && \
+  wget https://storage.googleapis.com/xm-bucket/public/NotoSerifCJKsc-Regular.otf -O /usr/share/fonts/NotoSerifCJKsc-Regular.otf && \
+  fc-cache -f -v && \
+  fc-list :lang=zh && \
+  # 清理
+  apt-get autoremove && \
+  apt-get autoclean && \
+  rm -rf /var/lib/apt/lists/* && \
+  # Test
+  java -version

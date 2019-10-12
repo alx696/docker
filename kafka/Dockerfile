@@ -1,5 +1,5 @@
 #父镜像
-FROM xm69/openjdk:alpine-13
+FROM xm69/openjdk:13
 
 #版本定义
 ENV VERSION_KAFKA 2.3.0
@@ -12,17 +12,12 @@ WORKDIR /server
 COPY ["resource/", "/resource/"]
 
 RUN \
-  apk update && \
-  apk add --no-cache bash && \
   mv /resource/entrypoint.sh / && \
   chmod +x /entrypoint.sh && \
-  # 初始配置
-  touch /server/server.conf && \
-  echo "IP=127.0.0.1" >> /server/server.conf && \
-  echo "PORT=9092" >> /server/server.conf && \
   # 准备Kafka
-  curl -O "https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/$VERSION_KAFKA/kafka_2.12-$VERSION_KAFKA.tgz" && \
+  wget "https://mirrors.tuna.tsinghua.edu.cn/apache/kafka/$VERSION_KAFKA/kafka_2.12-$VERSION_KAFKA.tgz" && \
   tar zxf "kafka_2.12-$VERSION_KAFKA.tgz" && \
+  rm "kafka_2.12-$VERSION_KAFKA.tgz" && \
   mv "kafka_2.12-$VERSION_KAFKA" "kafka" && \
   sed -i "s/\#listeners\=/listeners\=/g" "kafka/config/server.properties" && \
   sed -i "s/\/\/\:9092/\/\/0.0.0.0\:9092/g" "kafka/config/server.properties" && \
@@ -33,10 +28,16 @@ RUN \
   echo "offsets.retention.check.interval.ms=60000" "kafka/config/server.properties" && \
   echo "offsets.retention.minutes=1" "kafka/config/server.properties" && \
   # 准备Zookeeper
-  curl -O "https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-$VERSION_ZOOKEEPER/apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
+  wget "https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-$VERSION_ZOOKEEPER/apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
   tar zxf "apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
+  rm "apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
   mv "apache-zookeeper-$VERSION_ZOOKEEPER-bin" "zookeeper" && \
-  mv "zookeeper/conf/zoo_sample.cfg" "zookeeper/conf/zoo.cfg"
+  mv "zookeeper/conf/zoo_sample.cfg" "zookeeper/conf/zoo.cfg" && \
+  sed -i "s/tmp/server\/data/g" "zookeeper/conf/zoo.cfg" && \
+  # forward log to docker log collector
+  mkdir -p /server/kafka/logs/ && \
+  touch /server/kafka/logs/server.log && \
+  ln -sf /dev/stdout /server/kafka/logs/server.log
 
 #入口
 ENTRYPOINT ["/entrypoint.sh"]

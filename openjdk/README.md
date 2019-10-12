@@ -1,7 +1,9 @@
 # 特点
 
 * 设置时区: **Asia/Shanghai**
-* 添加中文字体: **Noto Sans CJK SC**
+* 中文字体: **Noto Serif CJK SC**
+* 安装wget, nano
+* 阿里云源
 
 # 构建
 
