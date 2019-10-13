@@ -3,8 +3,14 @@
 FROM postgres:11-alpine
 
 ENV POSTGIS_VERSION 2.5.3
+ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/edge	
 
 RUN set -ex \
+    \	
+    && echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \	
+    && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \	
+    && echo "$ALPINE_MIRROR/testing/" >> /etc/apk/repositories \	
+    && apk update \
     \
     && apk add --no-cache --virtual .fetch-deps \
         ca-certificates \
@@ -30,12 +36,10 @@ RUN set -ex \
         make \
         perl \
     \
-    && apk add --no-cache --virtual .build-deps-edge \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    && apk add --no-cache --virtual .build-deps-testing \
         gdal-dev \
         geos-dev \
-        proj4-dev \
+        proj-dev \
         protobuf-c-dev \
     && cd /usr/src/postgis \
     && ./autogen.sh \
@@ -50,7 +54,7 @@ RUN set -ex \
     && apk add --no-cache --virtual .postgis-rundeps-testing \
         geos \
         gdal \
-        proj4 \
+        proj \
         protobuf-c \
     && cd / \
     && rm -rf /usr/src/postgis \
