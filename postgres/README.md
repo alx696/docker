@@ -9,11 +9,11 @@ $ docker run -d --restart=always \
 -v ${PWD}/postgres:/data \
 -p 65432:5432 \
 -e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=any_password \
---name "postgres" xm69/postgres:postgis-2.5
+--name "postgres" xm69/postgres:11-gis2.5
 ```
 
 # 构建
 
 ```
-$ docker build -t xm69/postgres:postgis-2.5 .
+$ docker build -t xm69/postgres:11-gis2.5 .
 ```
