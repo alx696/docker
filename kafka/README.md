@@ -10,7 +10,7 @@
 ```
 $ docker run -d --restart=always \
   -p 50020:9092 \
-  -e IP=172.17.0.1 -e PORT=50020 \
+  -e "KAFKA_HOST=172.17.0.1:50020" \
   --name "kafka" xm69/kafka:2.3
 ```
 
