@@ -24,9 +24,9 @@
 ## 在线安装
 
 ```
-$ curl -fsSL https://get.docker.com -o get-docker.sh
-$ sudo sh get-docker.sh
-$ sudo usermod -aG docker $USER
+$ curl -fsSL https://get.docker.com -o get-docker.sh && \
+  sudo sh get-docker.sh && \
+  sudo usermod -aG docker $USER
 ```
 > 参考 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script
 
