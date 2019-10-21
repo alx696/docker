@@ -30,6 +30,10 @@ $ curl -fsSL https://get.docker.com -o get-docker.sh && \
 ```
 > 参考 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script
 
+### 设置更新源
+
+docker官方源速度慢, 可以改为阿里云的源: `https://mirrors.aliyun.com/docker-ce/linux/ubuntu`.
+
 ## 离线安装
 
 1. 安装依赖
