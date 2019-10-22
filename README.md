@@ -81,3 +81,21 @@ docker官方源速度慢, 可以改为阿里云的源: `https://mirrors.aliyun.c
 
 ## 访问控制
 在对安全性有要求的项目中，需要禁用一些端口从服务器外访问。网上很多资料已经过时，测试发现Docker会自动配置iptables以公开映射到主机的端口，可以通过在 `/etc/docker/daemon.json` 中添加 `"iptables": false` 配置来关闭自动公开。但是如果关闭了自动公开，nginx就无法获取remote_addr(即客户真实IP)，会带来一些无法预料的问题。**推荐使用自定义网卡（user-defined bridge network）来关联容器，对主机只暴露需要公开的端口。**
+
+# 自建registry server
+
+> 参考 https://docs.docker.com/registry/deploying/
+
+```
+$  docker run -d --restart=always \
+  -v ${PWD}/registry:/var/lib/registry \
+  -v /etc/letsencrypt/live/np.lilu.red/fullchain.pem:/certs/server.cer \
+  -v /etc/letsencrypt/live/np.lilu.red/privkey.pem:/certs/server.key \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:86 \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.cer \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/server.key \
+  -p 86:86 \
+  --name registry \
+  registry
+```
+> 注意: REGISTRY_HTTP_ADDR的端口与p参数的要内外一致.
