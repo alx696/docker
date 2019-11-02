@@ -24,7 +24,7 @@
 ## 在线安装
 
 ```
-$ curl -fsSL https://get.docker.com -o get-docker.sh && \
+$ wget https://get.docker.com -O get-docker.sh && \
   sudo sh get-docker.sh --mirror Aliyun && \
   sudo usermod -aG docker $USER
 ```
