@@ -1,15 +1,15 @@
 # 参考 https://hub.docker.com/r/mdillon/postgis/dockerfile
 
-FROM postgres:11-alpine
+FROM postgres:12-alpine
 
-ENV POSTGIS_VERSION 2.5.3
-ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/edge	
+ENV POSTGIS_VERSION 2.5.4
+ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/edge
 
 RUN set -ex \
-    \	
-    && echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \	
-    && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \	
-    && echo "$ALPINE_MIRROR/testing/" >> /etc/apk/repositories \	
+    \
+    && echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \
+    && echo "$ALPINE_MIRROR/community/" >> /etc/apk/repositories \
+    && echo "$ALPINE_MIRROR/testing/" >> /etc/apk/repositories \
     && apk update \
     \
     && apk add --no-cache --virtual .fetch-deps \
