@@ -1,4 +1,4 @@
-FROM adoptopenjdk:11-jdk-openj9
+FROM adoptopenjdk:14-jdk-openj9
 
 ENV LANG="C.UTF-8" \
  DEBIAN_FRONTEND="noninteractive"
@@ -20,6 +20,7 @@ RUN \
   apt-get install -y fontconfig xfonts-utils && \
   mkdir -p /usr/share/fonts/ && \
   wget https://github.com/googlefonts/noto-cjk/raw/master/NotoSerifCJKsc-Regular.otf -O /usr/share/fonts/NotoSerifCJKsc-Regular.otf && \
+#  wget https://172.17.0.1/NotoSerifCJKsc-Regular.otf --no-check-certificate -O /usr/share/fonts/NotoSerifCJKsc-Regular.otf && \
   fc-cache -f -v && \
   fc-list :lang=zh && \
   # 清理
