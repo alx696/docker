@@ -1,8 +1,8 @@
 # 参考 https://hub.docker.com/r/mdillon/postgis/dockerfile
 
-FROM postgres:12-alpine
+FROM postgres:11-alpine
 
-ENV POSTGIS_VERSION 2.5.4
+ENV POSTGIS_VERSION 2.5.3
 ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/edge
 
 RUN set -ex \
