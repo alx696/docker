@@ -1,5 +1,5 @@
 #父镜像
-FROM xm69/openj9:11
+FROM xm69/openj9:14
 
 #工作目录
 WORKDIR /app

@@ -10,13 +10,13 @@
 $ docker run -d --restart=always \
   -p 50020:9092 \
   -e KAFKA_HOST="192.168.1.2:50020" \
-  --name "kafka" xm69/kafka:2.4
+  --name "kafka" xm69/kafka:2.5
 ```
 
 # 构建
 
 ```
-$ docker build -t xm69/kafka:2.4 .
+$ docker build -t xm69/kafka:2.5 .
 ```
 
 # 镜像制作要点

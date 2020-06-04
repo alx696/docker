@@ -4,7 +4,7 @@
 #https://github.com/openresty/headers-more-nginx-module
 
 #父镜像
-FROM alpine:3.9
+FROM alpine:3
 
 #nginx版本
 ENV NGINX_VERSION 1.19.0

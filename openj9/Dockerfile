@@ -19,7 +19,8 @@ RUN \
   # 中文字体Noto Sans CJK SC Regular
   apt-get install -y fontconfig xfonts-utils && \
   mkdir -p /usr/share/fonts/ && \
-  wget https://github.com/googlefonts/noto-cjk/raw/master/NotoSerifCJKsc-Regular.otf -O /usr/share/fonts/NotoSerifCJKsc-Regular.otf && \
+#  wget https://github.com/googlefonts/noto-cjk/raw/master/NotoSerifCJKsc-Regular.otf -O /usr/share/fonts/NotoSerifCJKsc-Regular.otf && \
+  wget https://file.lilu.red:444/font/NotoSerifCJKsc-Regular.otf -O /usr/share/fonts/NotoSerifCJKsc-Regular.otf && \
 #  wget https://172.17.0.1/NotoSerifCJKsc-Regular.otf --no-check-certificate -O /usr/share/fonts/NotoSerifCJKsc-Regular.otf && \
   fc-cache -f -v && \
   fc-list :lang=zh && \

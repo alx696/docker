@@ -1,6 +1,6 @@
 # 注意
 
-现在 https://hub.docker.com/r/postgis/postgis 提供了官方镜像, 可以直接使用.
+现在 https://hub.docker.com/r/postgis/postgis 提供了官方镜像, 可以直接使用!
 
 # 特点
 

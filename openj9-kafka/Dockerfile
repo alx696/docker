@@ -1,9 +1,10 @@
 #父镜像
-FROM xm69/openj9:11
+FROM xm69/openj9:14
 
 #版本定义
-ENV VERSION_KAFKA 2.4.0
-ENV VERSION_ZOOKEEPER 3.5.6
+## 注意: 清华镜像路径经常调整, 修改版本前检查链接是否可用!
+ENV VERSION_KAFKA 2.5.0
+ENV VERSION_ZOOKEEPER 3.5.8
 
 #工作目录
 WORKDIR /server
@@ -28,7 +29,7 @@ RUN \
   echo "offsets.retention.check.interval.ms=60000" "kafka/config/server.properties" && \
   echo "offsets.retention.minutes=1" "kafka/config/server.properties" && \
   # 准备Zookeeper
-  wget "https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-$VERSION_ZOOKEEPER/apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
+  wget "https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/stable/apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
   tar zxf "apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
   rm "apache-zookeeper-$VERSION_ZOOKEEPER-bin.tar.gz" && \
   mv "apache-zookeeper-$VERSION_ZOOKEEPER-bin" "zookeeper" && \
