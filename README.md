@@ -38,7 +38,8 @@ $ wget https://get.docker.com -O get-docker.sh && \
 4. 安装docker-ce
 5. 设置用户组 `$ sudo usermod -aG docker $USER`
 > 参考 https://docs.docker.com/engine/install/ubuntu/#install-from-a-package
-> 地址(20.04) https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
+
+> 20.04地址 https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
 
 # 设置
 参考 https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file
