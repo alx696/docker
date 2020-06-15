@@ -79,8 +79,8 @@ RUN echo "$ALPINE_MIRROR/main/" > /etc/apk/repositories \
   # 创建服务目录
   && mkdir -p /logs /web \
   # forward request and error logs to docker log collector
-	&& ln -sf /dev/stdout /logs/access.log \
-	&& ln -sf /dev/stderr /logs/error.log \
+	&& ln -sf /dev/stdout /var/log/nginx-error.log \
+	&& ln -sf /dev/stderr /var/log/nginx-access.log \
   # 删除资源目录
   && rm -rf /resource
 
