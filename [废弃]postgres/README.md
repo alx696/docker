@@ -11,9 +11,9 @@
 ```
 $ docker run -d --restart=always \
 -v ${PWD}/postgres:/data \
--p 65432:5432 \
--e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=any_password \
---name "postgres" xm69/postgres:11-gis2.5
+-p 5432:5432 \
+-e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
+--name "postgres" postgis/postgis:12-3.0
 ```
 
 # 构建
