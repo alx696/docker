@@ -28,7 +28,7 @@ $ wget https://get.docker.com -O get-docker.sh && \
   sudo sh get-docker.sh --mirror Aliyun && \
   sudo usermod -aG docker $USER
 ```
-> 参考 https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script
+> 参考 https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script
 
 ## 离线安装
 
