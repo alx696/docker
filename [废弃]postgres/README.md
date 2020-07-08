@@ -16,6 +16,16 @@ $ docker run -d --restart=always \
 --name "postgres" postgis/postgis:12-3.0
 ```
 
+# 管理工具
+
+```
+$ docker run -d \
+  -p ${PORT_BASE}5433:80 \
+  -e "PGADMIN_DEFAULT_EMAIL=p@g.cn" \
+  -e "PGADMIN_DEFAULT_PASSWORD=postgres" \
+  --name "postgres-pgadmin" dpage/pgadmin4:latest
+```
+
 # 构建
 
 ```
