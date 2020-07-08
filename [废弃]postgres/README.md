@@ -26,16 +26,10 @@ $ docker run -d \
   --name "postgres-pgadmin" dpage/pgadmin4:latest
 ```
 
-# 构建
+---
 
-```
-$ docker build -t xm69/postgres:11-gis2.5 .
-```
+# 扩展
 
-# 推送
+## 文本搜索
 
-```bash
-tag="xm69/postgres:11-gis2.5" \ &&
-docker tag ${tag} registry.cn-hangzhou.aliyuncs.com/${tag} \ &&
-docker push registry.cn-hangzhou.aliyuncs.com/${tag}
-```
+[文本搜索](http://www.postgres.cn/docs/12/textsearch-intro.html) 默认不支持中文，安装[pg_cjk_parser](https://github.com/alx696/pg_cjk_parser)进行支持。
