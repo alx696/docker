@@ -19,7 +19,7 @@ $ docker run -d --restart=always \
 # 管理工具
 
 ```
-$ docker run -d \
+$ docker run -d --restart=always \
   -p 5433:80 \
   -e "PGADMIN_DEFAULT_EMAIL=p@g.cn" \
   -e "PGADMIN_DEFAULT_PASSWORD=postgres" \
