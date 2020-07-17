@@ -97,3 +97,9 @@ $  docker run -d --restart=always \
   registry
 ```
 > 注意: REGISTRY_HTTP_ADDR的端口与p参数的要内外一致.
+
+# 镜像
+
+注意：目前镜像都只能对官方镜像加速！
+
+* https://dockerhub.mirrors.nwafu.edu.cn/
