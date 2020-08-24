@@ -1,5 +1,5 @@
 #父镜像
-FROM redis:5-alpine
+FROM redis:6-alpine
 
 #环境变量
 ENV ALPINE_MIRROR https://mirrors.aliyun.com/alpine/latest-stable
