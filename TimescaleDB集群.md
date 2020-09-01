@@ -14,6 +14,16 @@ $ docker run -d --restart=always \
   -v ${PWD}/db-m:/data \
   --name db-m timescale/timescaledb:latest-pg12 \
   -c "max_connections=100" \
+  -c "shared_buffers=4GB" \
+  -c "effective_cache_size=12GB" \
+  -c "work_mem=64MB" \
+  -c "maintenance_work_mem=2GB" \
+  -c "checkpoint_completion_target=0.9" \
+  -c "random_page_cost=1.1" \
+  -c "effective_io_concurrency=200" \
+  -c "min_wal_size=4GB" \
+  -c "max_wal_size=8GB" \
+  -c "default_statistics_target=500" \
   -c "jit=off"
 
 $ echo "host replication all all md5" | sudo tee -a ${PWD}/db-m/db/pg_hba.conf
@@ -57,6 +67,16 @@ $ docker run -d --restart=always \
   -v ${PWD}/db-s1:/data \
   --name db-s1 timescale/timescaledb:latest-pg12 \
   -c "max_connections=100" \
+  -c "shared_buffers=4GB" \
+  -c "effective_cache_size=12GB" \
+  -c "work_mem=64MB" \
+  -c "maintenance_work_mem=2GB" \
+  -c "checkpoint_completion_target=0.9" \
+  -c "random_page_cost=1.1" \
+  -c "effective_io_concurrency=200" \
+  -c "min_wal_size=4GB" \
+  -c "max_wal_size=8GB" \
+  -c "default_statistics_target=500" \
   -c "jit=off"
 ```
 
