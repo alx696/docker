@@ -52,9 +52,10 @@ $ docker restart db-m
 安装工具并进行设置：
 ```
 $ sudo apt install -y postgresql-client
-$ sudo pg_basebackup -h 192.168.1.200 -p 40001 -D ${PWD}/db-s1/db -U ru -P -v  -R -X stream -C -S slot1
+
+$ sudo pg_basebackup -h 192.168.1.2 -p 40001 -D ${PWD}/db-s1/db -U ru -P -v  -R -X stream -C -S slot1
 ```
-> `192.168.1.200`为主机的IP！询问`Password:`时输入`ru`。终端打印“pg_basebackup: base backup completed”说明此步骤成功。`slot1`为Replication Slots。
+> `192.168.1.2`为主机的IP！询问`Password:`时输入`ru`。终端打印“pg_basebackup: base backup completed”说明此步骤成功。`slot1`为Replication Slots。
 
 ```
 $ sudo chmod -R 777 db-s1
@@ -84,16 +85,7 @@ $ docker run -d --restart=always \
 ```
 $ docker logs --tail 6 db-s1
 ```
-输出如下字样：
-```
-2020-08-31 16:18:24.506 CST [27] LOG:  database system was interrupted; last known up at 2020-08-31 16:17:36 CST
-2020-08-31 16:18:24.580 CST [27] LOG:  entering standby mode
-2020-08-31 16:18:24.599 CST [27] LOG:  redo starts at 0/4000028
-2020-08-31 16:18:24.604 CST [27] LOG:  consistent recovery state reached at 0/4000100
-2020-08-31 16:18:24.604 CST [1] LOG:  database system is ready to accept read only connections
-2020-08-31 16:18:24.611 CST [31] LOG:  started streaming WAL from primary at 0/5000000 on timeline 1
-```
-> 最后一行为"started streaming WAL from primary..."说明配置成功。
+输出最后一行含"started streaming WAL from primary..."说明配置成功。
 
 ## 验证
 
