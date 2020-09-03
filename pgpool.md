@@ -1,3 +1,7 @@
+# 注意
+
+实测并不成功，老是报一些没有配置的奇怪错误。
+
 ### 安装依赖
 
 ```
@@ -14,16 +18,14 @@ $ ./configure ;\
   make -j 32 ;\
   sudo make install ;\
   sudo mkdir -p /var/log/pgpool/ ;\
-  sudo mkdir -p /var/run/pgpool/ ;\
   sudo cp /usr/local/etc/pgpool.conf.sample /usr/local/etc/pgpool.conf ;\
   sudo nano /usr/local/etc/pgpool.conf
 ```
-修改`listen_addresses`等号右边为`'*'`，然后将其中`# - Backend Connection Settings -`行到`# - Authentication -`行之间的内容替换为：
+修改`listen_addresses = '*'`，修改`pid_file_name = 'pgpool.pid'`，将其中`# - Backend Connection Settings -`行到`# - Authentication -`行之间的内容替换为：
 ```
 backend_hostname0 = '192.168.1.2'
 backend_port0 = 40001
 backend_weight0 = 1
-backend_flag0 = 'ALWAYS_MASTER'
 backend_hostname1 = '192.168.1.3'
 backend_port1 = 40002
 backend_weight1 = 1
@@ -36,7 +38,14 @@ backend_weight2 = 1
 执行：
 ```
 $ echo "postgres:e8a48653851e28c69d0506508fb27fc5" | sudo tee -a /usr/local/etc/pcp.conf
+
+$ echo "host all all all md5" | sudo tee -a /usr/local/etc/pool_hba.conf
 ```
+执行：
+```
+$ sudo pg_md5 -p -m -u postgres /usr/local/etc/pool_passwd
+```
+输入`postres`，生成密码。
 
 ## 启动
 
@@ -44,3 +53,7 @@ $ echo "postgres:e8a48653851e28c69d0506508fb27fc5" | sudo tee -a /usr/local/etc/
 $ sudo pgpool -n
 ```
 > 见到`LOG:  pgpool-II successfully started.`字样说明安装成功。
+
+# 参考
+
+https://aijishu.com/a/1060000000131238
