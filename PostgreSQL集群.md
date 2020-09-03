@@ -7,10 +7,22 @@
 
 ```
 $ docker run -d --restart=always \
--v ${PWD}/postgres-m:/data \
--p 5434:5432 \
--e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
---name "postgres-m" postgres:12
+  -v ${PWD}/postgres-m:/data \
+  -p 5434:5432 \
+  -e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
+  --name "postgres-m" postgres:12 \
+  -c "max_connections=100" \
+  -c "shared_buffers=4GB" \
+  -c "effective_cache_size=12GB" \
+  -c "work_mem=64MB" \
+  -c "maintenance_work_mem=2GB" \
+  -c "checkpoint_completion_target=0.9" \
+  -c "random_page_cost=1.1" \
+  -c "effective_io_concurrency=200" \
+  -c "min_wal_size=4GB" \
+  -c "max_wal_size=8GB" \
+  -c "default_statistics_target=500" \
+  -c "jit=off"
 
 $ echo "host replication all all md5" | sudo tee -a ${PWD}/db-m/db/pg_hba.conf
 ```
@@ -46,23 +58,26 @@ $ docker run -d --restart=always \
   -v ${PWD}/postgres-s1:/data \
   -p 5435:5432 \
   -e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
-  --name "postgres-s1" postgres:12
+  --name "postgres-s1" postgres:12 \
+  -c "max_connections=100" \
+  -c "shared_buffers=4GB" \
+  -c "effective_cache_size=12GB" \
+  -c "work_mem=64MB" \
+  -c "maintenance_work_mem=2GB" \
+  -c "checkpoint_completion_target=0.9" \
+  -c "random_page_cost=1.1" \
+  -c "effective_io_concurrency=200" \
+  -c "min_wal_size=4GB" \
+  -c "max_wal_size=8GB" \
+  -c "default_statistics_target=500" \
+  -c "jit=off"
 ```
 
 验证：
 ```
 $ docker logs --tail 6 postgres-s1
 ```
-输出如下字样：
-```
-2020-08-31 16:18:24.506 CST [27] LOG:  database system was interrupted; last known up at 2020-08-31 16:17:36 CST
-2020-08-31 16:18:24.580 CST [27] LOG:  entering standby mode
-2020-08-31 16:18:24.599 CST [27] LOG:  redo starts at 0/4000028
-2020-08-31 16:18:24.604 CST [27] LOG:  consistent recovery state reached at 0/4000100
-2020-08-31 16:18:24.604 CST [1] LOG:  database system is ready to accept read only connections
-2020-08-31 16:18:24.611 CST [31] LOG:  started streaming WAL from primary at 0/5000000 on timeline 1
-```
-> 最后一行为"started streaming WAL from primary..."说明配置成功。
+输出最后一行为"started streaming WAL from primary..."说明配置成功。
 
 ## 验证
 

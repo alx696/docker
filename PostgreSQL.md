@@ -18,12 +18,21 @@ $ docker run -d --restart=always \
 
 # 管理工具
 
+pgadmin
 ```
 $ docker run -d --restart=always \
   -p 5433:80 \
   -e "PGADMIN_DEFAULT_EMAIL=p@g.cn" \
   -e "PGADMIN_DEFAULT_PASSWORD=postgres" \
   --name "postgres-pgadmin" dpage/pgadmin4:latest
+```
+
+psql
+```
+$ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' ;\
+  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - ;\
+  sudo apt-get update ;\
+  sudo apt install -y postgresql-client-12
 ```
 
 ---
