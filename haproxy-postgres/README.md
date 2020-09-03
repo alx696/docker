@@ -18,6 +18,16 @@ $ docker run -d --restart=always \
   --name haproxy_postgres xm69/haproxy:postgres
 ```
 
+也可直接映射配置运行：
+```
+$ docker run -d --restart=always \
+  -p 40000:40000 \
+  -p 40001:40001 \
+  -p 40002:40002 \
+  -v $PWD/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg \
+  --name haproxy_postgres haproxy:2.2
+```
+
 # 构建
 
 ```
