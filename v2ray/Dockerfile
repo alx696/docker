@@ -25,7 +25,7 @@ RUN \
   DOWNLOAD_LINK="https://github.com/v2fly/v2ray-core/releases/download/$VERSION_TAG/v2ray-linux-$MACHINE.zip" && \
   # 下载V2Ray
   wget -O v2ray.zip $DOWNLOAD_LINK && \
-  unzip version.json v2ray.zip && \
+  unzip v2ray.zip && \
   mkdir -p /var/log/v2ray/ && \
   touch /var/log/v2ray/access.log && \
   touch /var/log/v2ray/error.log && \
