@@ -1,25 +1,40 @@
-# 环境变量
+## 文件
 
-* `KAFKA_HOST` ip:端口
+* `证书库` 放置服务器证书密钥及其根证书, 对应内部路径`/server/ssl/keystore.jks`
 
-> Kafka工作时必须有确定的ip和端口，故运行容器时必须通过环境变量进行设置. 如果将ip设为127.0.0.1, 则局域网内其它设备是无法联通kafka! 暴露到互联网时,必须设为公网ip.
+## 端口
 
-# 运行示例
+* `9092` 明文
+* `9093` 加密且验证客户端证书
+
+## 环境变量
+
+* `KEYSTORE_PASSWORD` 证书库密码
+* `IP` 最终提供服务IP, 如要公网使用此处设置公网IP
+* `PLAINTEXT_PORT` 非加密端口, 对应内部端口`9092`
+* `SSL_PORT` 加密端口, 对应内部端口`9093`
+
+### 运行示例
 
 ```
 $ docker run -d --restart=always \
-  -p 50020:9092 \
-  -e KAFKA_HOST="192.168.1.2:50020" \
-  --name "kafka" xm69/kafka:2.5
+  -p 39092:9092 \
+  -p 39093:9093 \
+  -v $PWD/kafka.keystore.jks:/server/ssl/keystore.jks \
+  -e KEYSTORE_PASSWORD="123456" \
+  -e IP="192.168.1.200" \
+  -e PLAINTEXT_PORT="39092" \
+  -e SSL_PORT="39093" \
+  --name "kafka" xm69/kafka:2.6
 ```
 
-# 构建
+### 构建
 
 ```
-$ docker build -t xm69/kafka:2.5 .
+$ docker build -t xm69/kafka:2.6 .
 ```
 
-# 镜像制作要点
+### 镜像制作要点
 
 > Dockfile已经自动下载kafka和zookeeper软件包, 无需人工下载和配置.
 
