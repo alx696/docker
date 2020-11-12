@@ -10,7 +10,7 @@ if [ -n "$1" ]; then
   #Don`t exit!
   tail -f /dev/null
 else
-  echo "没有设置启动脚本"
+  echo "没有启动脚本"
 fi
 
-exec "$@"
+exit 0
