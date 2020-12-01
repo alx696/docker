@@ -9,8 +9,9 @@
 * 删除btrfs挂载: `# cd /var/lib/docker && \ btrfs subvolume delete btrfs/subvolumes/*`
 
 ## 容器
-*  存为镜像: `$ docker commit 容器名称 镜像名称:版本` (尽量不用, 镜像体积会越来越大)
-*  查看日志: `$ docker logs -f --tail 10 容器名称`
+* 存为镜像: `$ docker commit 容器名称 镜像名称:版本` (尽量不用, 镜像体积会越来越大)
+* 查看日志: `$ docker logs -f --tail 10 容器名称`
+* 复制文件：`$ docker cp 容器ID或名称:/path/to/file .` 从容器中复制文件到当前目录
 
 ## 镜像
 *  保存为本地文件: `$ docker save -o 本地文件名字.tar 镜像1:版本 镜像2:版本`
