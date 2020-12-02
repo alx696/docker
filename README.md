@@ -86,16 +86,15 @@ $ wget https://get.docker.com -O get-docker.sh && \
 > 参考 https://docs.docker.com/registry/deploying/
 
 ```
-$  docker run -d --restart=always \
+$ docker run -d --restart=always \
   -v ${PWD}/registry:/var/lib/registry \
-  -v /etc/letsencrypt/live/np.lilu.red/fullchain.pem:/certs/server.cer \
-  -v /etc/letsencrypt/live/np.lilu.red/privkey.pem:/certs/server.key \
-  -e REGISTRY_HTTP_ADDR=0.0.0.0:86 \
-  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/server.cer \
-  -e REGISTRY_HTTP_TLS_KEY=/certs/server.key \
-  -p 86:86 \
+  -v ~/docker/tls/:/certs/ \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:3000 \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/fullchain.pem \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/privkey.pem \
+  -p 3000:3000 \
   --name registry \
-  registry
+  registry:2
 ```
 > 注意: REGISTRY_HTTP_ADDR的端口与p参数的要内外一致.
 
