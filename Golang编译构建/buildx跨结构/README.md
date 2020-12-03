@@ -1,6 +1,10 @@
 ## 特点
 
-使用buildx。
+使用buildx:
+```
+docker buildx build --platform linux/arm64 -t xm69/service-file:1 . --load
+```
+> 注意：只有--push推送模式时才支持同时构建多个平台，--load只能单个平台.
 
 ### 优势
 
