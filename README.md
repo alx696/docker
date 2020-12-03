@@ -61,6 +61,15 @@ $ wget https://get.docker.com -O get-docker.sh && \
 ```
 >  默认情况下日志过多会占用大量的硬盘空间, 日志位置: /var/lib/docker/containers/容器哈希/容器哈希-json.log . 设置仅对新创建容器有效!!! 针对现有容器可以执行 `truncate -s 0 /var/lib/docker/containers/*/*-json.log` 手动清空.
 
+开发环境中，在 **~/.docker/config.json** 中添加[配置](https://docs.docker.com/engine/reference/commandline/cli/#configuration-files):
+```
+{
+  "experimental": "enabled",
+  "debug": true
+}
+```
+> 正式环境不要设置！
+
 ## ulimits
 使用时发现如果高频率大数据量在PostgreSQL中插入JSONB类型数据时, 容易触发 Resource temporarily unavailable 和 No space left on device 问题. 经确认增加ulimits中的**open files**数量可以解决此问题.
 
