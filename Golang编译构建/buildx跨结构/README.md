@@ -12,4 +12,4 @@ docker buildx build --platform linux/arm64 -t xm69/service-file:1 . --load
 
 ### 缺点
 
-没有build通用，某些情况下会报错。比如使用Golang基础镜像时，go丢失了执行路径。
+没有build通用，某些情况下会报错。构建速度慢，比buid慢不少。比如使用Golang基础镜像时，go丢失了执行路径。
