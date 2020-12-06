@@ -112,3 +112,13 @@ $ docker run -d --restart=always \
 注意：目前镜像都只能对官方镜像加速！
 
 * https://dockerhub.mirrors.nwafu.edu.cn/
+
+# 问题
+
+### 容器无法运行
+
+#### Restarting (132)
+
+家里一台老电脑CPU是AMD A6-3670 APU，运行go-file容器时容器一直重启，状态为`Restarting (132)`，没有任何日志。反复尝试多次重新编译镜像，问题不能解决。开发机CPU为Intel(R) Core(TM) i5-8600K是支持的，运行正常。查询CPU信息的命令为`$ cat /proc/cpuinfo`
+
+通过直接添加RocksDB共享库的方式，直接编译golang程序则能够运行。参考两个类似问题[1](https://stackoverflow.com/questions/49198919/kong-official-docker-images-broken),[2](https://github.com/Kong/docker-kong/issues/138#issuecomment-449423106)，估计是RocksDB编译的指令sse4_2在老CPU中不支持导致。
