@@ -1,36 +1,22 @@
 #父镜像
-FROM debian:buster
+FROM registry.cn-shanghai.aliyuncs.com/xm69/jre:openj9
 
-ENV LANG="C.UTF-8" \
- DEBIAN_FRONTEND="noninteractive" \
- ROCKSDB_VERSION="6.5"
+ENV DEBIAN_FRONTEND="noninteractive" \
+  ROCKSDB_VERSION="6.13.3"
 
-#执行
-RUN \
-  set -eux && \
-  sed -i s/deb.debian.org/mirrors.aliyun.com/g /etc/apt/sources.list && \
-  sed -i s/security.debian.org/mirrors.aliyun.com/g /etc/apt/sources.list && \
+RUN set -eux && \
   apt-get update && \
-  apt-get install -y apt-utils apt-transport-https && \
-  apt-get upgrade -y && \
-  # 时区设为上海(注意:必须删除/etc/localtime,否则对时区的修改不会生效!)
-  apt-get install -y tzdata && \
-  rm /etc/localtime && \
-  echo "Asia/Shanghai" > /etc/timezone && \
-  dpkg-reconfigure -f noninteractive tzdata && \
-  # 安装工具
-  apt-get install -y nano wget unzip && \
-  # RocksDB库
+  # RocksDB
   apt-get install -y build-essential libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev && \
-  wget https://github.com/facebook/rocksdb/archive/${ROCKSDB_VERSION}.fb.zip && \
-  unzip ${ROCKSDB_VERSION}.fb.zip && \
-  cd rocksdb-${ROCKSDB_VERSION}.fb && \
+  wget https://xm.lilu.red:444/soft/rocksdb-${ROCKSDB_VERSION}.tar.gz && \
+  tar zxf rocksdb-${ROCKSDB_VERSION}.tar.gz && \
+  cd "rocksdb-${ROCKSDB_VERSION}" && \
   PORTABLE=1 make -j32 shared_lib && \
   make install-shared && \
   echo "/usr/local/lib" >> /etc/ld.so.conf && \
   ldconfig && \
   cd .. && \
-  rm -rf ${ROCKSDB_VERSION}.fb.zip "rocksdb-${ROCKSDB_VERSION}.fb" && \
+  rm -rf ${ROCKSDB_VERSION}.tar.gz "rocksdb-${ROCKSDB_VERSION}" && \
   apt-get remove -y build-essential && \
   # 清理
   apt-get autoremove -y && \

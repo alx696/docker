@@ -7,5 +7,5 @@
 # 构建
 
 ```
-$ docker build -t xm69/rocksdb:debian .
+$ docker build -t registry.cn-shanghai.aliyuncs.com/xm69/jre-rocksdb:openj9 .
 ```
