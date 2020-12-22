@@ -1,5 +1,5 @@
 #父镜像
-FROM registry.cn-shanghai.aliyuncs.com/xm69/jre:openj9
+FROM registry.cn-shanghai.aliyuncs.com/xm69/jre:11
 
 ENV DEBIAN_FRONTEND="noninteractive" \
   ROCKSDB_VERSION="6.14.6"
