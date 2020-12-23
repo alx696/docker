@@ -70,23 +70,6 @@ $ wget https://get.docker.com -O get-docker.sh && \
 ```
 > 正式环境不要设置！
 
-## ulimits
-使用时发现如果高频率大数据量在PostgreSQL中插入JSONB类型数据时, 容易触发 Resource temporarily unavailable 和 No space left on device 问题. 经确认增加ulimits中的**open files**数量可以解决此问题.
-
-在 **/etc/docker/daemon.json** 中添加配置:
-```
-{
-  "default-ulimits": {
-    "nofile": {
-      "Name": "nofile",
-      "Hard": 64000,
-      "Soft": 64000
-    }
-  }
-}
-```
->  此方式未测试.
-
 ## 访问控制
 在对安全性有要求的项目中，需要禁用一些端口从服务器外访问。网上很多资料已经过时，测试发现Docker会自动配置iptables以公开映射到主机的端口，可以通过在 `/etc/docker/daemon.json` 中添加 `"iptables": false` 配置来关闭自动公开。但是如果关闭了自动公开，nginx就无法获取remote_addr(即客户真实IP)，会带来一些无法预料的问题。**推荐使用自定义网卡（user-defined bridge network）来关联容器，对主机只暴露需要公开的端口。**
 
