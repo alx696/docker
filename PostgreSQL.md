@@ -1,22 +1,18 @@
-# 注意
+## 概述
 
-现在 https://hub.docker.com/r/postgis/postgis 提供了官方镜像, 可以直接使用!
+可以直接使用[postgres](https://hub.docker.com/_/postgres)或[postgis](https://hub.docker.com/r/postgis/postgis)。
 
-# 特点
-
-* 安装PostGIS 2.5
-
-# 运行示例
+## 运行示例
 
 ```
 $ docker run -d --restart=always \
 -v ${PWD}/postgres:/data \
 -p 5432:5432 \
 -e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
---name "postgres" postgis/postgis:12-3.0
+--name "postgres" postgis:13
 ```
 
-# 管理工具
+## 管理工具
 
 pgadmin
 ```
@@ -32,7 +28,7 @@ psql
 $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' ;\
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - ;\
   sudo apt-get update ;\
-  sudo apt install -y postgresql-client-12
+  sudo apt install -y postgresql-client-13
 ```
 
 ---
