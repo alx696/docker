@@ -19,7 +19,7 @@ pgadmin
 $ docker run -d --restart=always \
   -p 5433:80 \
   -e "PGADMIN_DEFAULT_EMAIL=p@g.cn" \
-  -e "PGADMIN_DEFAULT_PASSWORD=postgres" \
+  -e "PGADMIN_DEFAULT_PASSWORD=p" \
   --name "postgres-pgadmin" dpage/pgadmin4:latest
 ```
 
