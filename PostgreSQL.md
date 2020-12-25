@@ -6,11 +6,29 @@
 
 ```
 $ docker run -d --restart=always \
--v ${PWD}/postgres:/data \
--p 5432:5432 \
--e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
---name "postgres" postgis:13
+  -p 5432:5432 \
+  -v "${PWD}/postgres":/data \
+  -e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
+  --name "postgres" postgres:13 \
+  -c "max_connections=1000" \
+  -c "shared_buffers=4GB" \
+  -c "effective_cache_size=8GB" \
+  -c "work_mem=64MB" \
+  -c "maintenance_work_mem=2GB" \
+  -c "checkpoint_completion_target=0.9" \
+  -c "random_page_cost=1.1" \
+  -c "effective_io_concurrency=200" \
+  -c "min_wal_size=4GB" \
+  -c "max_wal_size=8GB" \
+  -c "default_statistics_target=500" \
+  -c "jit=off" \
+  -c "log_statement=all" \
+  -c "log_min_duration_statement=1000" \
+  -c "log_connections=true" \
+  -c "log_disconnections=true" \
+  -c "log_line_prefix='%m [%p] [%r] '"
 ```
+> [参考日志文档](http://postgres.cn/docs/12/runtime-config-logging.html) 进入生成环境后可将`log_statement`设为`none`关闭所有执行语句的记录。
 
 ## 管理工具
 
