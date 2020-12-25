@@ -54,7 +54,9 @@ $ wget https://get.docker.com -O get-docker.sh && \
 {
   "log-driver": "json-file",
   "log-opts": {
-    "max-size": "16m",
+    "mode": "non-blocking",
+    "max-buffer-size": "3m",
+    "max-size": "3m",
     "max-file": "3"
   }
 }
