@@ -9,7 +9,7 @@ $ docker run -d --restart=always \
   -p 5432:5432 \
   -v "${PWD}/postgres":/data \
   -e PGDATA=/data -e TZ=Asia/Shanghai -e POSTGRES_PASSWORD=postgres \
-  --name "postgres" postgres:13 \
+  --name "postgres" postgres:13-alpine \
   -c "max_connections=1000" \
   -c "shared_buffers=4GB" \
   -c "effective_cache_size=8GB" \
