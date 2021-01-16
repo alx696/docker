@@ -22,6 +22,22 @@
 
 # 安装
 
+## 默认配置
+
+```
+$ sudo mkdir /etc/docker && echo '{
+  "data-root": "/home/'$USER'/docker",
+  "log-driver": "json-file",
+  "log-opts": {
+    "mode": "non-blocking",
+    "max-buffer-size": "3m",
+    "max-size": "3m",
+    "max-file": "3"
+  }
+}' | sudo tee -a /etc/docker/daemon.json
+```
+>  默认情况下日志过多会占用大量的硬盘空间, 日志位置: /var/lib/docker/containers/容器哈希/容器哈希-json.log . 设置仅对新创建容器有效!!! 针对现有容器可以执行 `truncate -s 0 /var/lib/docker/containers/*/*-json.log` 手动清空.
+
 ## 在线安装
 
 ```
@@ -43,21 +59,8 @@ $ wget https://get.docker.com -O get-docker.sh && \
 > 20.04地址 https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
 
 # 设置
-参考 https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file
 
-```
-$ sudo mkdir /etc/docker && echo '{
-  "data-root": "/home/'$USER'/docker",
-  "log-driver": "json-file",
-  "log-opts": {
-    "mode": "non-blocking",
-    "max-buffer-size": "3m",
-    "max-size": "3m",
-    "max-file": "3"
-  }
-}' | sudo tee -a /etc/docker/daemon.json
-```
->  默认情况下日志过多会占用大量的硬盘空间, 日志位置: /var/lib/docker/containers/容器哈希/容器哈希-json.log . 设置仅对新创建容器有效!!! 针对现有容器可以执行 `truncate -s 0 /var/lib/docker/containers/*/*-json.log` 手动清空.
+参考 https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file
 
 开发环境中，在 **~/.docker/config.json** 中添加[配置](https://docs.docker.com/engine/reference/commandline/cli/#configuration-files):
 ```
