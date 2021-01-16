@@ -45,13 +45,9 @@ $ wget https://get.docker.com -O get-docker.sh && \
 # 设置
 参考 https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file
 
-## 防止日志占用过多硬盘空间
-*  参考 https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container/42510314
-*  参考 https://docs.docker.com/config/containers/logging/json-file/
-
-在 **/etc/docker/daemon.json** 中添加配置:
 ```
-{
+$ sudo mkdir /etc/docker && echo '{
+  "data-root": "/home/'$USER'/docker",
   "log-driver": "json-file",
   "log-opts": {
     "mode": "non-blocking",
@@ -59,7 +55,7 @@ $ wget https://get.docker.com -O get-docker.sh && \
     "max-size": "3m",
     "max-file": "3"
   }
-}
+}' | sudo tee -a /etc/docker/daemon.json
 ```
 >  默认情况下日志过多会占用大量的硬盘空间, 日志位置: /var/lib/docker/containers/容器哈希/容器哈希-json.log . 设置仅对新创建容器有效!!! 针对现有容器可以执行 `truncate -s 0 /var/lib/docker/containers/*/*-json.log` 手动清空.
 
