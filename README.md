@@ -13,6 +13,10 @@
 * 查看日志: `$ docker logs -f --tail 10 容器名称`
 * 复制文件：`$ docker cp 容器ID或名称:/path/to/file .` 从容器中复制文件到当前目录
 
+### 赋予特权
+
+有时我们需要容器具有最高权限, 这时可以在启动时增加`--privileged`参数. 显著特性是容器可以访问主机所有设备了, [详细文档](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities);
+
 ## 镜像
 *  保存为本地文件: `$ docker save -o 本地文件名字.tar 镜像1:版本 镜像2:版本`
 *  从本地文件恢复: `$ docker load < 本地文件名字.tar`
