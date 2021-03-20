@@ -30,7 +30,7 @@
 
 ```
 $ sudo mkdir /etc/docker && echo '{
-  "data-root": "/home/'$USER'/docker",
+  "data-root": "/home/docker",
   "log-driver": "json-file",
   "log-opts": {
     "mode": "non-blocking",
