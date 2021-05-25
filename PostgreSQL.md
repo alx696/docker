@@ -45,10 +45,10 @@ $ docker run -d --restart=always \
 
 容器：
 ```
-$ docker run -it --rm --link suzhou2-postgres:ph \
+$ docker run -it --rm --link 数据库容器名称:ph \
   postgres:13 psql -h ph -d postgres -U postgres
 ```
-> `\q`退出
+> [参考](http://postgres.cn/docs/13/app-psql.html) `\q`退出
 
 操作系统：
 ```
