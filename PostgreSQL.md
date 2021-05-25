@@ -32,7 +32,7 @@ $ docker run -d --restart=always \
 
 ## 管理工具
 
-pgadmin
+### pgadmin
 ```
 $ docker run -d --restart=always \
   -p 5433:80 \
@@ -41,7 +41,16 @@ $ docker run -d --restart=always \
   --name "postgres-pgadmin" dpage/pgadmin4:latest
 ```
 
-psql
+### psql
+
+容器：
+```
+$ docker run -it --rm --link suzhou2-postgres:ph \
+  postgres:13 psql -h ph -d postgres -U postgres
+```
+> `\q`退出
+
+操作系统：
 ```
 $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' ;\
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - ;\
