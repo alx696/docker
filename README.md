@@ -13,6 +13,14 @@
 * 查看日志: `$ docker logs -f --tail 10 容器名称`
 * 复制文件：`$ docker cp 容器ID或名称:/path/to/file .` 从容器中复制文件到当前目录
 
+### 设置连接数量
+
+在Linux内核小于5.3的系统中，容器中默认`net.core.somaxconn`只有128,且设置系统的`/etc/sysctl.conf`并不能改变容器中的值。
+
+如果需要扩大，需在容器启动时设置参数`--sysctl net.core.somaxconn=64000`。进入容器后执行`cat /proc/sys/net/core/somaxconn`可以查看。
+
+> 测试发现好像没有实际起到作用？
+
 ### 赋予特权
 
 有时我们需要容器具有最高权限, 这时可以在启动时增加`--privileged`参数. 显著特性是容器可以访问主机所有设备了, [详细文档](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities);
