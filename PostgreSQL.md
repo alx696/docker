@@ -45,8 +45,12 @@ $ docker run -d --restart=always \
 
 容器：
 ```
+# 进入psql
 $ docker run -it --rm --link 数据库容器名称:ph \
   postgres:13 psql -h ph -d postgres -U postgres
+
+# 直接执行命令
+$ docker exec -i 容器名称 psql --dbname=postgres --username=postgres -c "drop table infrastructure_detection_point_data;"
 ```
 > [参考](http://postgres.cn/docs/13/app-psql.html) `\q`退出
 
@@ -56,6 +60,23 @@ $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -c
   wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - ;\
   sudo apt-get update ;\
   sudo apt install -y postgresql-client-13
+```
+
+## 备份
+
+```
+# 指定schema备份（千万不要设置`--verbose`等输出日志内容到控制台的参数）
+docker exec -t 容器名称 pg_dump --dbname=postgres --username=postgres --clean --if-exists --no-owner --schema=public > "postgres.dump"
+
+# 可以输出日志的备份
+docker exec -t 容器名称 pg_dump --verbose --dbname=postgres --username=postgres --clean --if-exists --no-owner --schema=public --file="/data/postgres.dump" \
+&& docker cp 容器名称:/data/postgres.dump ./
+```
+
+## 恢复
+
+```
+cat "postgres.dump" | docker exec -i 容器名称 psql --dbname=postgres --username=postgres
 ```
 
 ---
