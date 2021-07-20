@@ -1,5 +1,3 @@
-# 常用
-
 ## 清理
 * 综合清理: `$ docker system prune` . 不会删除未被使用的本地卷和未被使用的镜像, 加上参数 `--all --volumes`将删除这些.
 * 删除所有6小时前处于停止状态的容器: `$ docker container prune --filter "until=6h"`
@@ -32,8 +30,6 @@
 *  删除REPOSITORY为none的镜像: `$ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")`
 *  删除TAG为none的镜像: `$ docker rmi -f $(docker images -f dangling=true -q)`
 
-# 安装
-
 ## 默认配置
 
 ```
@@ -50,15 +46,6 @@ $ sudo mkdir /etc/docker && echo '{
 ```
 >  默认情况下日志过多会占用大量的硬盘空间, 日志位置: /var/lib/docker/containers/容器哈希/容器哈希-json.log . 设置仅对新创建容器有效!!! 针对现有容器可以执行 `truncate -s 0 /var/lib/docker/containers/*/*-json.log` 手动清空.
 
-## 在线安装
-
-```
-$ wget https://get.docker.com -O get-docker.sh && \
-  sudo sh get-docker.sh --mirror Aliyun && \
-  sudo usermod -aG docker $USER
-```
-> 参考 https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script
-
 ## 离线安装
 
 1. 安装依赖
@@ -70,23 +57,10 @@ $ wget https://get.docker.com -O get-docker.sh && \
 
 > 20.04地址 https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
 
-# 设置
-
-参考 https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file
-
-开发环境中，在 **~/.docker/config.json** 中添加[配置](https://docs.docker.com/engine/reference/commandline/cli/#configuration-files):
-```
-{
-  "experimental": "enabled",
-  "debug": true
-}
-```
-> 正式环境不要设置！
-
 ## 访问控制
 在对安全性有要求的项目中，需要禁用一些端口从服务器外访问。网上很多资料已经过时，测试发现Docker会自动配置iptables以公开映射到主机的端口，可以通过在 `/etc/docker/daemon.json` 中添加 `"iptables": false` 配置来关闭自动公开。但是如果关闭了自动公开，nginx就无法获取remote_addr(即客户真实IP)，会带来一些无法预料的问题。**推荐使用自定义网卡（user-defined bridge network）来关联容器，对主机只暴露需要公开的端口。**
 
-# 自建registry server
+## 自建registry server
 
 > 参考 https://docs.docker.com/registry/deploying/
 
@@ -103,17 +77,9 @@ $ docker run -d --restart=always \
 ```
 > 注意: REGISTRY_HTTP_ADDR的端口与p参数的要内外一致.
 
-# 镜像
+## 特殊问题
 
-注意：目前镜像都只能对官方镜像加速！
-
-* https://dockerhub.mirrors.nwafu.edu.cn/
-
-# 问题
-
-### 容器无法运行
-
-#### Restarting (132)
+### Restarting (132)
 
 家里一台老电脑CPU是AMD A6-3670 APU，运行go-file容器时容器一直重启，状态为`Restarting (132)`，没有任何日志。反复尝试多次重新编译镜像，问题不能解决。开发机CPU为Intel(R) Core(TM) i5-8600K是支持的，运行正常。查询CPU信息的命令为`$ cat /proc/cpuinfo`
 
