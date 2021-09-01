@@ -48,6 +48,8 @@ $ sudo mkdir /etc/docker && echo '{
 
 ## 离线安装
 
+[下载3个软件包](https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/),按照下面步骤安装:
+
 1. 安装依赖
 2. 安装containerd.io
 3. 安装docker-ce-cli
@@ -55,13 +57,12 @@ $ sudo mkdir /etc/docker && echo '{
 5. 设置用户组 `$ sudo usermod -aG docker $USER`
 > 参考 https://docs.docker.com/engine/install/ubuntu/#install-from-a-package
 
-> 20.04地址 https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/
-
 ## 在线安装
 
 ```
  curl -fsSL https://get.docker.com -o get-docker.sh
  sudo sh get-docker.sh --mirror Aliyun
+ sudo usermod -aG docker $USER
 ```
 > 参考 https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script
 
