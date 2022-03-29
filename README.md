@@ -1,3 +1,7 @@
+## 日志
+
+查询指定时间段的日志 `docker logs --since 2022-03-29T09:00:00 --until 2022-03-29T10:30:00 容器名称`
+
 ## 清理
 * 综合清理: `$ docker system prune` . 不会删除未被使用的本地卷和未被使用的镜像, 加上参数 `--all --volumes`将删除这些.
 * 删除所有6小时前处于停止状态的容器: `$ docker container prune --filter "until=6h"`
