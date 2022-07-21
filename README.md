@@ -37,7 +37,7 @@
 ## 默认配置
 
 ```
-$ sudo mkdir /etc/docker && echo '{
+sudo mkdir /etc/docker && echo '{
   "data-root": "/home/docker",
   "log-driver": "json-file",
   "log-opts": {
@@ -45,6 +45,13 @@ $ sudo mkdir /etc/docker && echo '{
     "max-buffer-size": "3m",
     "max-size": "3m",
     "max-file": "3"
+  },
+  "proxies": {
+    "default": {
+      "httpProxy": "http://127.0.0.1:4445",
+      "httpsProxy": "http://127.0.0.1:4445",
+      "noProxy": "*.aliyuncs.com,*.pcyun.com,127.0.0.0/8"
+    }
   }
 }' | sudo tee -a /etc/docker/daemon.json
 ```
