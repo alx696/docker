@@ -73,6 +73,26 @@ sudo mkdir /etc/docker && echo '{
 ## 访问控制
 在对安全性有要求的项目中，需要禁用一些端口从服务器外访问。网上很多资料已经过时，测试发现Docker会自动配置iptables以公开映射到主机的端口，可以通过在 `/etc/docker/daemon.json` 中添加 `"iptables": false` 配置来关闭自动公开。但是如果关闭了自动公开，nginx就无法获取remote_addr(即客户真实IP)，会带来一些无法预料的问题。**推荐使用自定义网卡（user-defined bridge network）来关联容器，对主机只暴露需要公开的端口。**
 
+## 配置代理
+
+编辑 `/usr/lib/systemd/system/docker.service` 在 `[Service]`下添加新行:
+
+```
+Environment="HTTP_PROXY=http://127.0.0.1:4445/"
+Environment="HTTPS_PROXY=http://127.0.0.1:4445/"
+Environment="NO_PROXY=localhost,127.0.0.1,*.aliyuncs.com,*.pcyun.com"
+```
+
+应用设置:
+
+```
+sudo systemctl daemon-reload
+
+sudo systemctl restart docker
+```
+
+---
+
 ## 自建registry server
 
 > 参考 https://docs.docker.com/registry/deploying/
