@@ -45,13 +45,6 @@ sudo mkdir /etc/docker && echo '{
     "max-buffer-size": "3m",
     "max-size": "3m",
     "max-file": "3"
-  },
-  "proxies": {
-    "default": {
-      "httpProxy": "http://127.0.0.1:4445",
-      "httpsProxy": "http://127.0.0.1:4445",
-      "noProxy": "*.aliyuncs.com,*.pcyun.com,127.0.0.0/8"
-    }
   }
 }' | sudo tee -a /etc/docker/daemon.json
 ```
@@ -85,7 +78,7 @@ sudo mkdir /etc/docker && echo '{
 > 参考 https://docs.docker.com/registry/deploying/
 
 ```
-$ docker run -d --restart=always \
+docker run -d --restart=always \
   -v ${PWD}/registry:/var/lib/registry \
   -v ~/docker/tls/:/certs/ \
   -e REGISTRY_HTTP_ADDR=0.0.0.0:3000 \
