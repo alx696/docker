@@ -37,7 +37,7 @@
 ## 默认配置
 
 ```
-sudo mkdir /etc/docker && echo '{
+sudo mkdir -p /etc/docker && echo '{
   "data-root": "/home/docker",
   "log-driver": "json-file",
   "log-opts": {
@@ -64,9 +64,10 @@ sudo mkdir /etc/docker && echo '{
 ## 在线安装
 
 ```
- curl -fsSL https://get.docker.com -o get-docker.sh
- sudo sh get-docker.sh --mirror Aliyun
- sudo usermod -aG docker $USER
+sudo apt install -y curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh --mirror Aliyun
+sudo usermod -aG docker $USER
 ```
 > 参考 https://docs.docker.com/engine/install/debian/#install-using-the-convenience-script
 
