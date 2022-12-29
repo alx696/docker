@@ -98,18 +98,44 @@ sudo systemctl restart docker
 
 > 参考 https://docs.docker.com/registry/deploying/
 
+创建基本认证密码库:
+
+```
+docker run \
+  --entrypoint htpasswd \
+  httpd:2 -Bbn username password > htpasswd
+```
+
+> `username` 为用户, `password` 为密码, 密码只使用字母数字和下划线!
+
+创建容器:
+
 ```
 docker run -d --restart=always \
-  -v ${PWD}/registry:/var/lib/registry \
-  -v ~/docker/tls/:/certs/ \
-  -e REGISTRY_HTTP_ADDR=0.0.0.0:3000 \
-  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/fullchain.pem \
-  -e REGISTRY_HTTP_TLS_KEY=/certs/privkey.pem \
-  -p 3000:3000 \
+  -v /home/likm/registry:/var/lib/registry \
+  -v /home/likm/deploy-core-service/tls:/cert/ \
+  -e "REGISTRY_AUTH=htpasswd" \
+  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+  -e REGISTRY_AUTH_HTPASSWD_PATH=/var/lib/registry/htpasswd \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/cert/tls.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/cert/tls.pkcs8 \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:57024 \
+  -p 57024:57024 \
   --name registry \
   registry:2
 ```
-> 注意: REGISTRY_HTTP_ADDR的端口与p参数的要内外一致.
+
+> `REGISTRY_HTTP_ADDR` 的端口与 `-p` 参数的内外端口一致.
+
+推送镜像前登录:
+
+```
+docker login dev.pcyun.com:57024 --username=dev
+```
+
+输入密码.
+
+---
 
 ## 特殊问题
 
