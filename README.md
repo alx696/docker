@@ -88,7 +88,7 @@ sudo usermod -aG docker $USER
 ```
 Environment="HTTP_PROXY=http://127.0.0.1:4445/"
 Environment="HTTPS_PROXY=http://127.0.0.1:4445/"
-Environment="NO_PROXY=localhost,127.0.0.1,*.aliyuncs.com,*.pcyun.com"
+Environment="NO_PROXY=localhost,127.0.0.1,*.aliyuncs.com"
 ```
 
 应用设置:
