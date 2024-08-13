@@ -86,8 +86,8 @@ sudo usermod -aG docker $USER
 编辑 `/usr/lib/systemd/system/docker.service` 在 `[Service]`下添加新行:
 
 ```
-Environment="HTTP_PROXY=http://127.0.0.1:4445/"
-Environment="HTTPS_PROXY=http://127.0.0.1:4445/"
+Environment="HTTP_PROXY=http://127.0.0.1:4447/"
+Environment="HTTPS_PROXY=http://127.0.0.1:4447/"
 Environment="NO_PROXY=localhost,127.0.0.1,*.aliyuncs.com"
 ```
 
