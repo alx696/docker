@@ -34,6 +34,10 @@
 *  删除REPOSITORY为none的镜像: `$ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")`
 *  删除TAG为none的镜像: `$ docker rmi -f $(docker images -f dangling=true -q)`
 
+## 常用
+
+* 自动登录镜像库(输出变量中密码然后连用并设置 `--password-stdin` ) `echo $PASSWORD | docker login --username=真实的明明 --password-stdin registry.cn-shanghai.aliyuncs.com`
+
 ## 默认配置
 
 ```
