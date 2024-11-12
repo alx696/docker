@@ -78,8 +78,11 @@ sudo usermod -aG docker $USER
 ### 独立安装docker-compose
 
 ```
-# curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+# curl -SL https://github.com/docker/compose/releases/download/v2.30.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
 # chmod +x /usr/local/bin/docker-compose
+
+# docker compose version
 ```
 
 ## 访问控制
