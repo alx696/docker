@@ -30,6 +30,7 @@
 ## 镜像
 *  保存为本地文件: `$ docker save -o 本地文件名字.tar 镜像1:版本 镜像2:版本`
 *  从本地文件恢复: `$ docker load < 本地文件名字.tar`
+*  删除指定镜像: `$ docker rmi -f 镜像ID`
 *  删除所有镜像: `$ docker rmi -f $(docker images -q)`
 *  删除REPOSITORY为none的镜像: `$ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")`
 *  删除TAG为none的镜像: `$ docker rmi -f $(docker images -f dangling=true -q)`
