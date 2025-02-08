@@ -53,9 +53,9 @@ sudo mkdir -p /etc/docker && echo '{
   "log-driver": "json-file",
   "log-opts": {
     "mode": "non-blocking",
-    "max-buffer-size": "3m",
-    "max-size": "3m",
-    "max-file": "3"
+    "max-buffer-size": "4m",
+    "max-size": "16m",
+    "max-file": "7"
   }
 }' | sudo tee -a /etc/docker/daemon.json
 ```
