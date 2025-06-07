@@ -61,6 +61,8 @@ sudo mkdir -p /etc/docker && echo '{
 ```
 >  默认情况下日志过多会占用大量的硬盘空间, 日志位置: /var/lib/docker/containers/容器哈希/容器哈希-json.log . 设置仅对新创建容器有效!!! 针对现有容器可以执行 `truncate -s 0 /var/lib/docker/containers/*/*-json.log` 手动清空.
 
+每个容器建议独立配置日志回滚策略, dockr run时添加参数 `--log-opt max-size=4m --log-opt max-file=7 --log-opt compress=true` .
+
 ## 离线安装
 
 [下载3个软件包](https://download.docker.com/linux/ubuntu/dists/focal/pool/stable/amd64/),按照下面步骤安装:
